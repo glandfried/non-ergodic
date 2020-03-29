@@ -253,9 +253,13 @@ def gross_domestic_product(wealths):
 
 def gross_domestic_product_per_capita(wealths):
     return gross_domestic_product(wealths)/len(wealths)
-    
+
 def democratic_domestic_product(wealths):
     return np.prod(wealths)
 
 def democratic_domestic_product_per_capita(wealths):
     return democratic_domestic_product(wealths)**(1/len(wealths))
+
+def growth(state_t, state_0,dt=1):
+    return (1/dt) * np.log(state_t/state_0)
+
