@@ -10,40 +10,6 @@ from matplotlib import pyplot as plt
 
 #__all__ = ["dW","wiener"]
 
-"""
-The ergodicity problem is common to:
-    - Evolutionary Biology
-    - Cultural evolution tehory
-    - Decision Theory
-    - Political Economics
-
-In all thgis fields, we make use of mathematics to analyze what happens to 
-individual agents over time. For this purpose we represent the real environment
-through a stochastic function.
-
-The question now is how to analyse the stochastic function in order to find the
-expected outcome, what will happen to agents typically.
-
-The original treatment (Pascal-Fermat-Huygens) states that the expected outcome
-can be found by multiplying each possible change in size by its probability of 
-occurrence, and add everything, i.e. the aritmetc mean.
-
-This model doesn’t fir human behavior, and that was noticed early. People did
-not follow the aritmetc mean. A categorical example is the St.Petersburg
-paradox.
-
-The modern Utility Theory born to fix the problems of the original treatment.
-In 1738 Daniel Bernoulli introduce the utility function over wealth, $u(x)$, to
-encodes the different preferences individuals. In general, the utility (i.e. 
-particular preference) of extra wealth is roughly inversely proportional to how
-many wealth one already has. This leads to a diferential change in utility 
-
-$$du = 1/w dw$$
-
-with solution
-
-$$u(w) = ln w$$.
-"""
 
 def change_in_utility(w):
     """
@@ -227,7 +193,7 @@ def multiplicative_process(n,rate,dt):
 
 def show_mult(n=120,rate=1.01,dt=1/12):
     """
-    show_mult(12,1.04,dt=1)
+    show_mult(100,1.04,dt=1)
     show_mult(12*12,1.01,dt=1/12)
     """
     x, y = multiplicative_process(n,rate,dt)
@@ -260,7 +226,7 @@ def perturbed_payment(rate=1.01,dt=1/12,sigma=0.1):
 
 def walk_perturbed_payment(n,rate,dt,sigma=100):
     """
-    walk_perturbed_payment(1000,1.01,1/12,100)
+    walk_perturbed_payment(100,1.01,1/12,3)
     """
     wealth = [1]
     for i in range(n):
@@ -276,4 +242,14 @@ def show_walk_perturbed_payment(n=10,iterations=1000,rate=1.005,dt=1/12,sigma=10
     for i in range(n):
         plt.plot(np.log10(walk_perturbed_payment(iterations,rate,dt,sigma)) )
         
-        
+def gross_domestic_product(wealths):
+    return np.sum(wealths)
+
+def gross_domestic_product_per_capita(wealths):
+    return gross_domestic_product(wealths)/len(wealths)
+    
+def democratic_domestic_product(wealths):
+    return np.prod(wealths)
+
+def democratic_domestic_product_per_capita(wealths):
+    return democratic_domestic_product(wealths)**(1/len(wealths))
