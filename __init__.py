@@ -263,3 +263,6 @@ def democratic_domestic_product_per_capita(wealths):
 def growth(state_t, state_0,dt=1):
     return (1/dt) * np.log(state_t/state_0)
 
+def second_theil_index(gdp,ddp):
+    return np.log(gdp/ddp)
+    
