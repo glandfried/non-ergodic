@@ -265,4 +265,8 @@ def growth(state_t, state_0,dt=1):
 
 def second_theil_index(gdp,ddp):
     return np.log(gdp/ddp)
-    
+
+def gini(wealths):
+    ys = sorted(list(wealths/sum(wealths)))
+    xs = np.arange(1,len(ys)+1)/len(ys)
+    return abs(1 - sum([(xs[i+1]-xs[i])*(ys[i+1]+ys[i]) for i in range(len(ys)-1)]))
