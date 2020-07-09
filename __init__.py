@@ -115,7 +115,7 @@ def perturbed_payment(rate=1.01,dt=1/12,sigma=0.1):
     """
     gamma = np.log(rate)/dt
     dv = gamma*dt + sigma*dW(0,dt)
-    return max(dv,0.00001)
+    return max(dv,-0.9999)
 
 def walk_perturbed_payment(n,rate,dt,sigma=100,log=False):
     """
