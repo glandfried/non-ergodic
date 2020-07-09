@@ -115,14 +115,14 @@ def perturbed_payment(rate=1.01,dt=1/12,sigma=0.1):
     """
     gamma = np.log(rate)/dt
     dv = gamma*dt + sigma*dW(0,dt)
-    return dv
+    return max(dv,0.00001)
 
-def walk_perturbed_payment(n,rate,dt,sigma=100):
+def walk_perturbed_payment(n,rate,dt,sigma=100,log=False):
     """
     walk_perturbed_payment(100,1.01,1/12,3)
     """
-    wealth = [1]
-    for i in range(n):
+    wealth = [1] 
+    for _ in range(n):
         dv = perturbed_payment(rate,dt,sigma)
         wealth.append(wealth[-1]+wealth[-1]*dv)
     return wealth
@@ -136,6 +136,7 @@ def multiplicative_perturbed_history(n=100,iterations=1000,rate=1.005,dt=1/12,si
 def show_walk_perturbed_payment(n=10,iterations=1000,rate=1.005,dt=1/12,sigma=2):
     """
     show_walk_perturbed_payment(n=10,sigma=2)
+    plt.show()
     show_walk_perturbed_payment(n=1,sigma=0)
     """
     for i in range(n):
